@@ -1,0 +1,211 @@
+using System.Collections.Generic;
+
+namespace PcToolkit
+{
+    public static class Loc
+    {
+        public static Lang Current = Lang.En;
+
+        private static readonly Dictionary<string, string[]> Map = new Dictionary<string, string[]>
+        {
+            
+            { "nav.overview", new[] { "Overview", "Visao Geral" } },
+            { "nav.services", new[] { "Services", "Servicos" } },
+            { "nav.programs", new[] { "Programs", "Programas" } },
+            { "nav.tasks", new[] { "Scheduled Tasks", "Tarefas agendadas" } },
+            { "nav.ramclean", new[] { "Clean RAM", "Limpar RAM" } },
+            { "nav.vram", new[] { "VRAM", "VRAM" } },
+            { "nav.settings", new[] { "Settings", "Configuracoes" } },
+            { "shell.subtitle", new[] { "Overlay + Startup + RAM", "Overlay + Inicializacao + RAM" } },
+
+            { "common.search", new[] { "Search:", "Buscar:" } },
+            { "common.refresh", new[] { "Refresh", "Atualizar" } },
+            { "common.action", new[] { "Action", "Acao" } },
+            { "common.enable", new[] { "Enable", "Ativar" } },
+            { "common.disable", new[] { "Disable", "Desativar" } },
+            { "common.changing", new[] { "Changing {0}...", "Alterando {0}..." } },
+            { "common.changeFailed", new[] { "Failed to change {0}.", "Falhou ao alterar {0}." } },
+
+            { "overview.vramInUse", new[] { "VRAM in use", "VRAM em uso" } },
+            { "overview.ramInUse", new[] { "RAM in use", "RAM em uso" } },
+            { "overview.autoServices", new[] { "Auto-start services", "Servicos auto-start" } },
+            { "overlay.card.title", new[] { "Floating overlay", "Overlay flutuante" } },
+            { "overlay.card.desc", new[] { "Shows VRAM and RAM in the corner of the screen. Shortcut: Ctrl+Shift+V", "Mostra VRAM e RAM no canto da tela. Atalho: Ctrl+Shift+V" } },
+            { "overlay.btn.hide", new[] { "Hide overlay", "Ocultar overlay" } },
+            { "overlay.btn.show", new[] { "Show overlay", "Mostrar overlay" } },
+            { "overview.chkAutoStart", new[] { "Start WinTrim with Windows", "Iniciar o WinTrim junto com o Windows" } },
+            { "overview.autostart.on", new[] { "Start with Windows enabled.", "Inicio com o Windows ativado." } },
+            { "overview.autostart.off", new[] { "Start with Windows disabled.", "Inicio com o Windows desativado." } },
+            { "overview.autostart.fail", new[] { "Failed to change automatic startup.", "Falhou ao alterar inicio automatico." } },
+
+            { "services.showAll", new[] { "Show all (not just auto-start)", "Mostrar todos (nao so inicio automatico)" } },
+            { "services.col.name", new[] { "Service", "Servico" } },
+            { "services.col.startup", new[] { "Startup", "Inicio" } },
+            { "services.col.stopNow", new[] { "Stop now", "Parar agora" } },
+            { "services.loading", new[] { "Loading services...", "Carregando servicos..." } },
+            { "services.loaded", new[] { "{0} services loaded.", "{0} servicos carregados." } },
+            { "services.stop", new[] { "Stop", "Parar" } },
+            { "services.noInfo", new[] { "No information available for this service.", "Sem informacoes cadastradas sobre este servico." } },
+            { "services.confirm.title", new[] { "Windows service: {0}", "Servico do Windows: {0}" } },
+            { "services.confirm.body", new[] { "{0}\n\nAre you sure you want to continue anyway?", "{0}\n\nTem certeza que deseja continuar mesmo assim?" } },
+            { "services.stopping", new[] { "Stopping {0}...", "Parando {0}..." } },
+            { "services.stopped", new[] { "{0} stopped.", "{0} parado." } },
+            { "services.stopFailed", new[] { "Failed to stop {0}.", "Falhou ao parar {0}." } },
+            { "services.changed", new[] { "{0} is now set to {1} startup.", "{0} agora e inicio {1}." } },
+
+            { "programs.title", new[] { "Startup Programs", "Programas na inicializacao" } },
+            { "programs.col.name", new[] { "Name", "Nome" } },
+            { "programs.col.scope", new[] { "Scope", "Escopo" } },
+            { "programs.col.command", new[] { "Command", "Comando" } },
+            { "programs.loading", new[] { "Loading startup programs...", "Carregando programas..." } },
+            { "programs.loaded", new[] { "{0} programs loaded.", "{0} programas carregados." } },
+            { "programs.noInfo", new[] { "No information available for this item. Command: {0}", "Sem informacoes cadastradas sobre este item. Comando: {0}" } },
+            { "programs.enabled", new[] { "{0} enabled.", "{0} ativado." } },
+            { "programs.disabled", new[] { "{0} disabled.", "{0} desativado." } },
+            { "startup.scope.user", new[] { "User", "Usuario" } },
+            { "startup.scope.machine", new[] { "Machine", "Maquina" } },
+            { "startup.scope.machine32", new[] { "Machine (32-bit)", "Maquina (32-bit)" } },
+            { "startup.scope.userFolder", new[] { "User (folder)", "Usuario (pasta)" } },
+            { "startup.scope.machineFolder", new[] { "Machine (folder)", "Maquina (pasta)" } },
+
+            { "tasks.title", new[] { "Scheduled Tasks (logon/boot)", "Tarefas agendadas (logon/boot)" } },
+            { "tasks.col.task", new[] { "Task", "Tarefa" } },
+            { "tasks.col.trigger", new[] { "Trigger", "Gatilho" } },
+            { "tasks.loading", new[] { "Loading scheduled tasks...", "Carregando tarefas..." } },
+            { "tasks.loaded", new[] { "{0} tasks loaded.", "{0} tarefas carregadas." } },
+            { "tasks.enabled", new[] { "{0} enabled.", "{0} ativada." } },
+            { "tasks.disabled", new[] { "{0} disabled.", "{0} desativada." } },
+
+            { "ramclean.stat.total", new[] { "Total installed", "Total instalada" } },
+            { "ramclean.stat.usedReal", new[] { "Actually in use", "Em uso real" } },
+            { "ramclean.stat.available", new[] { "Available", "Disponivel" } },
+            { "ramclean.stat.standby", new[] { "  - standby cache", "  - cache standby" } },
+            { "ramclean.stat.modified", new[] { "  - modified pages", "  - paginas modificadas" } },
+            { "ramclean.stat.committed", new[] { "Committed (reserved by apps)", "Committed (reservado por apps)" } },
+            { "ramclean.stat.pool", new[] { "Kernel/driver pool (paged/non-paged)", "Pool kernel/drivers (pag./nao-pag.)" } },
+            { "ramclean.btn.clean", new[] { "Clean memory now", "Limpar memoria agora" } },
+            { "ramclean.desc", new[] { "Cleaning empties the cache/working set and returns reusable memory to Windows. It does not close programs or fix leaks - it is temporary.", "A limpeza esvazia cache/working set e devolve memoria reaproveitavel ao Windows. Nao fecha programas nem corrige vazamento - e temporario." } },
+            { "ramclean.gridTitle", new[] { "Top processes by private RAM", "Top processos por RAM privada" } },
+            { "ramclean.col.process", new[] { "Process", "Processo" } },
+            { "ramclean.col.privateRam", new[] { "Private RAM (MB)", "RAM privada (MB)" } },
+            { "ramclean.unavailable", new[] { "unavailable", "indisponivel" } },
+            { "ramclean.summary", new[] { "Sum of all processes (private memory): {0} GB.\n{1}", "Soma de todos os processos (memoria privada): {0} GB.\n{1}" } },
+            { "ramclean.cleaning", new[] { "Cleaning memory...", "Limpando memoria..." } },
+            { "ramclean.doneAvailable", new[] { "{0} Available: {1}{2:0.00} GB", "{0} Disponivel: {1}{2:0.00} GB" } },
+            { "ramclean.purgeSuccess", new[] { "Cleanup completed successfully.", "Limpeza concluida com sucesso." } },
+            { "ramclean.purgeElevated", new[] { "Cleanup completed (via elevation).", "Limpeza concluida (via elevacao)." } },
+            { "ramclean.purgeFailed", new[] { "Failed (UAC denied or error).", "Falhou (UAC negado ou erro)." } },
+
+            { "vram.hags.title", new[] { "Hardware-accelerated GPU scheduling", "Escalonamento de GPU acelerado por hardware" } },
+            { "vram.hags.desc", new[] { "Lets the GPU driver manage its own VRAM queue instead of Windows. Can reduce or increase VRAM usage depending on your hardware. Requires restarting Windows to take effect.", "Deixa o driver da GPU gerenciar a fila de VRAM em vez do Windows. Pode reduzir ou aumentar o uso de VRAM dependendo do hardware. Precisa reiniciar o Windows pra valer." } },
+            { "vram.hags.checkbox", new[] { "Enabled", "Ativado" } },
+            { "vram.hags.changedOn", new[] { "Hardware-accelerated GPU scheduling enabled. Restart Windows to apply.", "Escalonamento de GPU por hardware ativado. Reinicie o Windows pra aplicar." } },
+            { "vram.hags.changedOff", new[] { "Hardware-accelerated GPU scheduling disabled. Restart Windows to apply.", "Escalonamento de GPU por hardware desativado. Reinicie o Windows pra aplicar." } },
+            { "vram.gridTitle", new[] { "Top processes by VRAM", "Top processos por VRAM" } },
+            { "vram.col.pref", new[] { "GPU preference", "Preferencia de GPU" } },
+            { "vram.pref.default", new[] { "System default", "Padrao do sistema" } },
+            { "vram.pref.powersaving", new[] { "Power saving", "Economia de energia" } },
+            { "vram.pref.highperf", new[] { "High performance", "Alto desempenho" } },
+            { "vram.setPrefTo", new[] { "Set: {0}", "Definir: {0}" } },
+            { "vram.close", new[] { "Close", "Fechar" } },
+            { "vram.confirm.close", new[] { "Close {0}? Unsaved work in this program will be lost.", "Fechar {0}? Trabalho nao salvo neste programa sera perdido." } },
+            { "vram.confirm.title", new[] { "Close program", "Fechar programa" } },
+            { "vram.closing", new[] { "Closing {0}...", "Fechando {0}..." } },
+            { "vram.closed", new[] { "{0} closed.", "{0} fechado." } },
+            { "vram.closeFailed", new[] { "Failed to close {0}.", "Falhou ao fechar {0}." } },
+            { "vram.prefChanged", new[] { "{0} GPU preference set to {1}.", "Preferencia de GPU de {0} definida para {1}." } },
+            { "vram.prefUnavailable", new[] { "Can't set a GPU preference for this process (path not accessible).", "Nao da pra definir preferencia de GPU pra este processo (caminho inacessivel)." } },
+            { "vram.unavailable", new[] { "Per-process GPU memory data isn't available on this system.", "Dados de memoria de GPU por processo nao estao disponiveis neste sistema." } },
+            { "vram.loading", new[] { "Loading VRAM usage...", "Carregando uso de VRAM..." } },
+            { "vram.loaded", new[] { "{0} processes loaded.", "{0} processos carregados." } },
+
+            { "settings.hotkey.title", new[] { "Overlay shortcut", "Atalho do overlay" } },
+            { "settings.hotkey.desc", new[] { "Click the field below and press the desired combination (needs Ctrl, Alt or Shift + a key).", "Clique no campo abaixo e pressione a combinacao desejada (precisa de Ctrl, Alt ou Shift + uma tecla)." } },
+            { "settings.hotkey.needModifier", new[] { "Choose at least Ctrl, Alt or Shift together with a key.", "Escolha ao menos Ctrl, Alt ou Shift junto com uma tecla." } },
+            { "settings.hotkey.updated", new[] { "Overlay shortcut updated to {0}.", "Atalho do overlay atualizado para {0}." } },
+            { "settings.opacity.title", new[] { "Overlay opacity", "Opacidade do overlay" } },
+            { "settings.language.title", new[] { "Language", "Idioma" } },
+            { "settings.language.desc", new[] { "Changes apply after the app restarts (it restarts itself automatically).", "As mudancas valem depois que o app reinicia (ele reinicia sozinho)." } },
+            { "settings.resetPos", new[] { "Reset overlay to default corner", "Reposicionar overlay no canto padrao" } },
+            { "settings.resetPos.done", new[] { "Overlay repositioned.", "Overlay reposicionado." } },
+            { "settings.dragHint", new[] { "Tip: drag the overlay across the screen holding the click - the position is saved automatically.", "Dica: arraste o overlay pela tela segurando o clique - a posicao e salva automaticamente." } },
+
+            { "overlay.initial", new[] { "CPU: --\nVRAM: --\nRAM: --", "CPU: --\nVRAM: --\nRAM: --" } },
+            { "overlay.cpu", new[] { "CPU {0}%", "CPU {0}%" } },
+            { "overlay.cpu.unavailable", new[] { "CPU: unavailable", "CPU: indisponivel" } },
+            { "overlay.cpu.error", new[] { "CPU: read error", "CPU: erro leitura" } },
+            { "overlay.vram", new[] { "VRAM {0:0.00}/{1:0.0}GB ({2}%)", "VRAM {0:0.00}/{1:0.0}GB ({2}%)" } },
+            { "overlay.vram.error", new[] { "VRAM: read error", "VRAM: erro leitura" } },
+            { "overlay.ram", new[] { "RAM {0:0.00}/{1:0.0}GB ({2}%)", "RAM {0:0.00}/{1:0.0}GB ({2}%)" } },
+            { "overlay.ram.error", new[] { "RAM: read error", "RAM: erro leitura" } },
+
+            { "tray.toggleOverlay", new[] { "Show/Hide Overlay ({0})", "Mostrar/Ocultar Overlay ({0})" } },
+            { "tray.openPanel", new[] { "Open Panel...", "Abrir Painel..." } },
+            { "tray.exit", new[] { "Exit", "Sair" } },
+
+            { "autostart.shortcutDesc", new[] { "WinTrim - Overlay, Startup and RAM", "WinTrim - Overlay, Inicializacao e RAM" } },
+
+            { "svccatalog.BFE", new[] { "Base Filtering Engine - underlies the Windows Firewall and network filtering policies. Disabling it breaks network protection and can lock up the connection.", "Base Filtering Engine - sustenta o Firewall do Windows e as politicas de filtragem de rede. Desativar derruba a protecao de rede e pode travar a conexao." } },
+            { "svccatalog.MpsSvc", new[] { "Windows Firewall - blocks unwanted network traffic. Disabling it leaves the PC exposed on the network.", "Firewall do Windows - bloqueia trafego de rede indesejado. Desativar deixa o PC exposto na rede." } },
+            { "svccatalog.WinDefend", new[] { "Windows Defender antivirus. Only safe to disable if you already use another active antivirus.", "Antivirus Windows Defender. Desativar so e seguro se voce ja usa outro antivirus ativo." } },
+            { "svccatalog.wscsvc", new[] { "Windows Security Center - monitors antivirus/firewall and shows alerts. Doesn't protect by itself, just warns.", "Central de Seguranca do Windows - monitora antivirus/firewall e mostra alertas. Nao protege sozinho, so avisa." } },
+            { "svccatalog.EventLog", new[] { "Windows Event Log - records system events used for diagnostics. Many programs depend on it; do not disable.", "Log de Eventos do Windows - registra eventos do sistema usados por diagnostico. Muitos programas dependem dele; nao desative." } },
+            { "svccatalog.PlugPlay", new[] { "Plug and Play - detects and configures connected hardware (USB, etc). Essential for Windows to work.", "Plug and Play - detecta e configura hardware conectado (USB, etc). Essencial para o Windows funcionar." } },
+            { "svccatalog.RpcSs", new[] { "Remote Procedure Call (RPC) - infrastructure used by almost the entire system. Never disable.", "Chamada de Procedimento Remoto (RPC) - infraestrutura usada por quase todo o sistema. Nunca desative." } },
+            { "svccatalog.RpcEptMapper", new[] { "RPC Endpoint Mapper - complements RpcSs. Never disable.", "Mapeador de Terminais RPC - complementa o RpcSs. Nunca desative." } },
+            { "svccatalog.DcomLaunch", new[] { "DCOM Server Process Launcher - starts COM services on demand. Critical to the system.", "Iniciador de Processo de Servidor DCOM - inicia servicos COM sob demanda. Critico para o sistema." } },
+            { "svccatalog.Power", new[] { "Power management - controls power plans, sleep and hibernation. Do not disable.", "Gerenciamento de energia - controla planos de energia, suspensao e hibernacao. Nao desative." } },
+            { "svccatalog.Schedule", new[] { "Windows Task Scheduler - runs scheduled tasks (maintenance, updates, etc). Many apps depend on it.", "Agendador de Tarefas do Windows - executa tarefas agendadas (manutencao, atualizacoes, etc). Muitos apps dependem dele." } },
+            { "svccatalog.SamSs", new[] { "Security Accounts Manager - controls user accounts and logon. Critical; disabling it can lock up logon.", "Gerenciador de Contas de Seguranca - controla contas de usuario e logon. Critico; desativar pode travar o logon." } },
+            { "svccatalog.LSM", new[] { "Local Session Manager - controls user sessions. Critical to the system.", "Gerenciador de Sessoes Locais - controla sessoes de usuario. Critico para o sistema." } },
+            { "svccatalog.CryptSvc", new[] { "Cryptographic Services - validates file and Windows Update signatures. Disabling it can break Windows Update.", "Servicos de Criptografia - valida assinaturas de arquivos e atualizacoes do Windows. Desativar pode quebrar Windows Update." } },
+            { "svccatalog.Winmgmt", new[] { "Windows Management Instrumentation (WMI) - used by diagnostics, antivirus, and this very program. Never disable.", "Instrumentacao de Gerenciamento do Windows (WMI) - usado por diagnostico, antivirus e por este proprio programa. Nunca desative." } },
+            { "svccatalog.gpsvc", new[] { "Group Policy Client - applies system policies (even on a home PC). Disabling it can lock up logon.", "Cliente de Diretiva de Grupo - aplica politicas do sistema (mesmo em PC domestico). Desativar pode travar o logon." } },
+            { "svccatalog.Dhcp", new[] { "DHCP Client - automatically obtains an IP on the network. Disabling it breaks networking in almost every home scenario.", "Cliente DHCP - obtem IP automaticamente na rede. Desativar derruba a rede em quase todo cenario domestico." } },
+            { "svccatalog.Dnscache", new[] { "DNS Client - resolves site names to IPs and caches them. Disabling it makes browsing much slower or broken.", "Cliente DNS - resolve nomes de site em IP e faz cache. Desativar deixa a navegacao bem mais lenta ou quebrada." } },
+            { "svccatalog.NlaSvc", new[] { "Network Location Awareness - identifies whether the network is public/private for the firewall. Do not disable.", "Reconhecimento de Localizacao de Rede - identifica se a rede e publica/privada para o firewall. Nao desative." } },
+            { "svccatalog.Themes", new[] { "Windows visual themes. Safe to disable - it just reverts to the classic look.", "Temas visuais do Windows. Seguro desativar - so volta pra aparencia classica." } },
+            { "svccatalog.AudioSrv", new[] { "Windows Audio. Disabling it removes all sound from the system.", "Audio do Windows. Desativar tira todo o som do sistema." } },
+            { "svccatalog.AudioEndpointBuilder", new[] { "Audio Endpoint Builder - manages audio devices. Disabling it removes all sound from the system.", "Compilador de Terminais de Audio - gerencia dispositivos de audio. Desativar tira todo o som do sistema." } },
+            { "svccatalog.Spooler", new[] { "Print Spooler. Safe to disable if you don't use a printer.", "Spooler de Impressao. Seguro desativar se voce nao usa impressora." } },
+            { "svccatalog.WSearch", new[] { "Windows Search - indexes files for fast search. Safe to disable; it only makes Explorer search slower.", "Windows Search - indexa arquivos para busca rapida. Seguro desativar; so deixa a busca do Explorer mais lenta." } },
+            { "svccatalog.SysMain", new[] { "SysMain/Superfetch - preloads frequently used apps into RAM. Safe to disable, especially on an SSD.", "SysMain/Superfetch - pre-carrega apps usados com frequencia na RAM. Seguro desativar, principalmente em SSD." } },
+            { "svccatalog.wuauserv", new[] { "Windows Update - downloads and installs system updates. Disabling it prevents automatic security updates.", "Windows Update - baixa e instala atualizacoes do sistema. Desativar impede atualizacoes automaticas de seguranca." } },
+            { "svccatalog.LanmanServer", new[] { "Server - lets you share files/printers on the network. Safe to disable if you don't share anything.", "Servidor - permite compartilhar arquivos/impressoras na rede. Seguro desativar se voce nao compartilha nada." } },
+            { "svccatalog.LanmanWorkstation", new[] { "Workstation - accesses network shares from other PCs. Disabling it breaks access to shared folders.", "Estacao de Trabalho - acessa compartilhamentos de rede de outros PCs. Desativar quebra acesso a pastas compartilhadas." } },
+            { "svccatalog.TrustedInstaller", new[] { "Windows Modules Installer - installs/removes Windows components and updates. Never disable.", "Windows Modules Installer - instala/remove componentes do Windows e atualizacoes. Nunca desative." } },
+            { "svccatalog.WlanSvc", new[] { "WLAN AutoConfig - manages Wi-Fi connections. Disabling it drops Wi-Fi (doesn't affect a cable).", "WLAN AutoConfig - gerencia conexoes Wi-Fi. Desativar derruba o Wi-Fi (nao afeta cabo)." } },
+            { "svccatalog.BITS", new[] { "Background Intelligent Transfer Service - used by Windows Update and several installers to download files gradually.", "Servico de Transferencia Inteligente em Segundo Plano - usado pelo Windows Update e varios instaladores para baixar arquivos aos poucos." } },
+            { "svccatalog.Netman", new[] { "Network Connections - manages network adapters in the Control Panel. Do not disable.", "Conexoes de Rede - gerencia adaptadores de rede no Painel de Controle. Nao desative." } },
+
+            { "startupcatalog.OneDrive", new[] { "Microsoft OneDrive file sync. Safe to disable if you don't use OneDrive.", "Sincronizacao de arquivos do Microsoft OneDrive. Seguro desativar se voce nao usa OneDrive." } },
+            { "startupcatalog.SecurityHealth", new[] { "Windows Security tray status icon. Disabling it doesn't affect protection, just the icon.", "Icone de status do Windows Security na bandeja. Desativar nao afeta a protecao, so o icone." } },
+            { "startupcatalog.Windows Defender", new[] { "Windows antivirus component. Not recommended to disable without another active antivirus.", "Componente do antivirus do Windows. Nao recomendado desativar sem outro antivirus ativo." } },
+            { "startupcatalog.RtkAudUService", new[] { "Realtek audio card utility. Safe to disable; audio keeps working.", "Utilitario da placa de audio Realtek. Seguro desativar; audio continua funcionando." } },
+            { "startupcatalog.IAStorIcon", new[] { "Intel storage driver (RAID/AHCI) status icon. Safe to disable.", "Icone de status do driver de armazenamento Intel (RAID/AHCI). Seguro desativar." } },
+            { "startupcatalog.NvBackend", new[] { "NVIDIA GeForce Experience background service. Safe to disable; drivers keep working.", "NVIDIA GeForce Experience em segundo plano. Seguro desativar; drivers continuam funcionando." } },
+            { "startupcatalog.NVIDIA", new[] { "NVIDIA component (drivers/GPU utility). Usually safe to remove from startup.", "Componente NVIDIA (drivers/utilitario de GPU). Geralmente seguro desativar da inicializacao." } },
+            { "startupcatalog.Steam", new[] { "Steam client starting with Windows. Safe to disable.", "Cliente da Steam iniciando com o Windows. Seguro desativar." } },
+            { "startupcatalog.Discord", new[] { "Discord client starting with Windows. Safe to disable.", "Cliente do Discord iniciando com o Windows. Seguro desativar." } },
+            { "startupcatalog.Skype", new[] { "Skype client starting with Windows. Safe to disable.", "Cliente do Skype iniciando com o Windows. Seguro desativar." } },
+            { "startupcatalog.Dropbox", new[] { "Dropbox file sync. Disabling it only stops automatic sync when the PC turns on.", "Sincronizacao de arquivos do Dropbox. Desativar so impede o sync automatico ao ligar o PC." } },
+            { "startupcatalog.CCleaner", new[] { "CCleaner cleanup utility. Safe to remove from startup.", "Utilitario de limpeza CCleaner. Seguro desativar da inicializacao." } },
+            { "startupcatalog.Adobe", new[] { "Adobe component/updater. Usually safe to disable.", "Componente/atualizador da Adobe. Geralmente seguro desativar." } },
+            { "startupcatalog.Spotify", new[] { "Spotify client starting with Windows. Safe to disable.", "Cliente do Spotify iniciando com o Windows. Seguro desativar." } },
+        };
+
+        public static string T(string key)
+        {
+            string[] arr;
+            if (!Map.TryGetValue(key, out arr)) return key;
+            int idx = Current == Lang.PtBr ? 1 : 0;
+            if (idx >= arr.Length || string.IsNullOrEmpty(arr[idx])) idx = 0;
+            return arr[idx];
+        }
+
+        public static string F(string key, params object[] args)
+        {
+            return string.Format(T(key), args);
+        }
+    }
+}
